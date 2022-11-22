@@ -9,10 +9,14 @@ public class Principal {
     public static void main(String[] args){
         ClienteDAO daoC = new ClienteDAO();
 
-        Cliente listaC = daoC.buscar("708.654.223-41");
+        //daoC.deletar("123");
+        Cliente cliente = new Cliente("123","123","123","123","123","123");
+        daoC.inserir(cliente);
 
-        //for(int i=0;i < listaC.size(); i++){
-            System.out.println(listaC.getNome()+"\n"+listaC.getEmail()+"\n"+listaC.getTelefone()+"\n");
-        //}
+        ArrayList<Cliente> listaC = daoC.relatorio();
+
+        for(int i=0;i < listaC.size(); i++){
+            System.out.println("\n"+listaC.get(i).getNome()+"\n"+listaC.get(i).getEmail()+"\n"+listaC.get(i).getTelefone());
+        }
     }
 }
