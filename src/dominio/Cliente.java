@@ -1,7 +1,6 @@
 package dominio;
 
 public class Cliente {
-    private int id;
     private String nome;
     private String cpf;
     private String telefone;
@@ -14,21 +13,12 @@ public class Cliente {
     }
 
     public Cliente(int id, String nome, String cpf, String telefone, String email, String login, String senha) {
-        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.login = login;
         this.senha = senha;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

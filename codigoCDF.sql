@@ -1,12 +1,11 @@
 CREATE TABLE IF NOT EXISTS Cliente (
-	id serial,
-	nome text,
-	cpf text, 
+	cpf text,
+	nome text, 
 	telefone text,
 	email text,
 	login text,
 	senha text,
-	PRIMARY KEY (id)
+	PRIMARY KEY (cpf)
 );
 
 CREATE TABLE IF NOT EXISTS Evento (
@@ -25,24 +24,24 @@ CREATE TABLE IF NOT EXISTS Evento (
 );
 
 CREATE TABLE IF NOT EXISTS Pessoa (
-	id serial,
-	nome text,
 	cpf text,
-	PRIMARY KEY (id)
+	nome text,
+	PRIMARY KEY (cpf)
 );
 
 CREATE TABLE IF NOT EXISTS Ingresso (
 	id serial,
 	fk_evento int,
-	fk_pessoa int,
+	fk_pessoa text,
 	FOREIGN KEY (fk_evento) REFERENCES Evento(id),
-	FOREIGN KEY (fk_pessoa) REFERENCES Pessoa(id)
+	FOREIGN KEY (fk_pessoa) REFERENCES Pessoa(cpf),
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS ClienteEvento (
-	fk_cliente int,
+	fk_cliente text,
 	fk_evento int,
-	FOREIGN KEY (fk_cliente) REFERENCES Cliente(id),
+	FOREIGN KEY (fk_cliente) REFERENCES Cliente(cpf),
 	FOREIGN KEY (fk_evento) REFERENCES Evento(id),
 	PRIMARY KEY (fk_cliente, fk_evento)
 );
