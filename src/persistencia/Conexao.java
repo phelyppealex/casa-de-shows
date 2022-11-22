@@ -13,11 +13,10 @@ public class Conexao {
 
     }
 
-    public Conexao(String usuario, String senha, String caminho, Connection minhaConexao){
+    public Conexao(String caminho, String usuario, String senha){
         this.usuario = usuario;
         this.senha = senha;
         this.caminho = caminho;
-        this.minhaConexao = minhaConexao;
     }
 
     public void conectar(){

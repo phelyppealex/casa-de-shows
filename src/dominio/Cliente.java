@@ -12,7 +12,7 @@ public class Cliente {
 
     }
 
-    public Cliente(int id, String nome, String cpf, String telefone, String email, String login, String senha) {
+    public Cliente(String cpf, String nome, String telefone, String email, String login, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
