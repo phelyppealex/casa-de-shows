@@ -13,10 +13,10 @@ public class Principal {
         Cliente cliente = new Cliente("123","123","123","123","123","123");
         daoC.inserir(cliente);
 
-        ArrayList<Cliente> listaC = daoC.relatorio();
+        ArrayList<Cliente> listaC = daoC.listar();
 
-        for(int i=0;i < listaC.size(); i++){
-            System.out.println("\n"+listaC.get(i).getNome()+"\n"+listaC.get(i).getEmail()+"\n"+listaC.get(i).getTelefone());
+        for(Cliente c:listaC){
+            System.out.println("\n"+c.getNome()+"\n"+c.getEmail()+"\n"+c.getTelefone());
         }
     }
 }

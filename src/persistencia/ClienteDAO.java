@@ -4,22 +4,21 @@ import dominio.Cliente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLOutput;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ClienteDAO {
     private Conexao c;
-    private String REL = "SELECT * FROM cliente";
-    private String BSC = "SELECT * FROM cliente WHERE cpf=?";
-    private String DEL = "DELETE FROM cliente WHERE cpf=?";
-    private String INS = "INSERT INTO cliente(cpf,nome,telefone,email,login,senha) VALUES (?,?,?,?,?,?)";
+    private final String REL = "SELECT * FROM cliente";
+    private final String BSC = "SELECT * FROM cliente WHERE cpf=?";
+    private final String DEL = "DELETE FROM cliente WHERE cpf=?";
+    private final String INS = "INSERT INTO cliente(cpf,nome,telefone,email,login,senha) VALUES (?,?,?,?,?,?)";
 
     public ClienteDAO(){
         c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
     }
 
-    public ArrayList<Cliente> relatorio(){
+    public ArrayList<Cliente> listar(){
         Cliente cliente;
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
         try{
@@ -27,7 +26,11 @@ public class ClienteDAO {
             Statement instrucao = c.getConexao().createStatement();
             ResultSet rs = instrucao.executeQuery(REL);
             while (rs.next()){
-                cliente = new Cliente(rs.getString("cpf"), rs.getString("nome"), rs.getString("telefone"), rs.getString("email"), rs.getString("login"), rs.getString("senha"));
+                cliente = new Cliente(
+                        rs.getString("cpf"), rs.getString("nome"),
+                        rs.getString("telefone"), rs.getString("email"),
+                        rs.getString("login"), rs.getString("senha")
+                );
                 lista.add(cliente);
             }
             c.desconectar();
@@ -45,7 +48,11 @@ public class ClienteDAO {
             instrucao.setString(1,cpf);
             ResultSet rs = instrucao.executeQuery();
             if(rs.next()){
-                cliente = new Cliente(rs.getString("cpf"), rs.getString("nome"), rs.getString("telefone"), rs.getString("email"), rs.getString("login"), rs.getString("senha"));
+                cliente = new Cliente(
+                        rs.getString("cpf"), rs.getString("nome"),
+                        rs.getString("telefone"), rs.getString("email"),
+                        rs.getString("login"), rs.getString("senha")
+                );
             }
             c.desconectar();
         }catch(Exception e){
@@ -84,3 +91,5 @@ public class ClienteDAO {
         }
     }
 }
+
+
