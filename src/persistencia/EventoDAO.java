@@ -11,6 +11,8 @@ public class EventoDAO {
     private Conexao c;
     private final String REL = "SELECT * FROM evento";
     private final String BSC = "SELECT * FROM evento WHERE id=?";
+    private final String DEL = "DELETE FROM evento WHERE id=?";
+    private final String INS = "INSERT INTO evento(nomeevento,data_event,hora,capacidade,rua,numero,bairro,cidade,uf,preco) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     public EventoDAO(){
         new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
@@ -63,5 +65,38 @@ public class EventoDAO {
             System.out.println("Erro na busca do evento");
         }
         return event;
+    }
+
+    public void inserir(Evento event){
+        try{
+            c.conectar();
+            PreparedStatement instrucao = c.getConexao().prepareStatement(INS);
+            instrucao.setString(1,event.getNomeEvento());
+            instrucao.setString(2,event.getData());
+            instrucao.setString(3,event.getHora());
+            instrucao.setInt(4,event.getCapacidade());
+            instrucao.setString(5,event.getRua());
+            instrucao.setInt(6,event.getNumero());
+            instrucao.setString(7,event.getBairro());
+            instrucao.setString(8,event.getCidade());
+            instrucao.setString(9,event.getUF());
+            instrucao.setDouble(10,event.getPreco());
+            instrucao.execute();
+            c.desconectar();
+        }catch(Exception e){
+            System.out.println("Erro ao inserir evento");
+        }
+    }
+
+    public void deletar(int id){
+        try{
+            c.conectar();
+            PreparedStatement instrucao = c.getConexao().prepareStatement(DEL);
+            instrucao.setInt(1,id);
+            instrucao.execute();
+            c.desconectar();
+        }catch(Exception e){
+            System.out.println("Erro ao deletar evento");
+        }
     }
 }
