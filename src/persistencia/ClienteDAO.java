@@ -35,7 +35,7 @@ public class ClienteDAO {
             }
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro ao emitir relatório de Cliente");
+            System.out.println("Erro ao emitir relatório de Cliente" + e.getMessage());
         }
         return lista;
     }
@@ -87,7 +87,7 @@ public class ClienteDAO {
             instrucao.execute();
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro na inserção do cliente");
+            System.out.println("Erro na inserção do cliente" + e.getMessage());
         }
     }
 }

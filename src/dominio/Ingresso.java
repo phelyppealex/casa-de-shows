@@ -2,17 +2,17 @@ package dominio;
 
 public class Ingresso {
     private int id;
-    private int fkEvento;
-    private int fkPessoa;
+    private Evento meuEvento;
+    private Pessoa minhaPessoa;
 
     public Ingresso(){
 
     }
 
-    public Ingresso(int id, int fkEvento, int fkPessoa){
+    public Ingresso(int id, Evento meuEvento, Pessoa minhaPessoa){
         this.id = id;
-        this.fkEvento = fkEvento;
-        this.fkPessoa = fkPessoa;
+        this.meuEvento = meuEvento;
+        this.minhaPessoa = minhaPessoa;
     }
 
     public int getId() {
@@ -23,19 +23,19 @@ public class Ingresso {
         this.id = id;
     }
 
-    public int getFkEvento() {
-        return fkEvento;
+    public Evento getMeuEvento() {
+        return meuEvento;
     }
 
-    public void setFkEvento(int fkEvento) {
-        this.fkEvento = fkEvento;
+    public void setMeuEvento(Evento meuEvento) {
+        this.meuEvento = meuEvento;
     }
 
-    public int getFkPessoa() {
-        return fkPessoa;
+    public Pessoa getMinhaPessoa() {
+        return minhaPessoa;
     }
 
-    public void setFkPessoa(int fkPessoa) {
-        this.fkPessoa = fkPessoa;
+    public void setMinhaPessoa(Pessoa minhaPessoa) {
+        this.minhaPessoa = minhaPessoa;
     }
 }

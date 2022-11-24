@@ -15,7 +15,7 @@ public class EventoDAO {
     private final String INS = "INSERT INTO evento(nomeevento,data_event,hora,capacidade,rua,numero,bairro,cidade,uf,preco) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     public EventoDAO(){
-        new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
+        c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
     }
 
     public ArrayList<Evento> listar(){
@@ -38,7 +38,7 @@ public class EventoDAO {
             }
             c.desconectar();
         }catch (Exception e){
-            System.out.println("Erro na inserção de evento");
+            System.out.println("Erro no relatório do evento - " + e.getMessage());
         }
         return lista;
     }
@@ -62,7 +62,7 @@ public class EventoDAO {
             }
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro na busca do evento");
+            System.out.println("Erro na busca do evento - " + e.getMessage());
         }
         return event;
     }
