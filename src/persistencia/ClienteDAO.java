@@ -35,7 +35,7 @@ public class ClienteDAO {
             }
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro ao emitir relatório de Cliente" + e.getMessage());
+            System.out.println("Erro ao emitir relatório de Cliente - " + e.getMessage());
         }
         return lista;
     }
@@ -56,7 +56,7 @@ public class ClienteDAO {
             }
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro ao buscar Cliente");
+            System.out.println("Erro ao buscar Cliente - " + e.getMessage());
         }
         return cliente;
     }
@@ -70,7 +70,7 @@ public class ClienteDAO {
             instrucao.execute();
             c.desconectar();
         }catch (Exception e){
-            System.out.println("Erro ao deletar cliente");
+            System.out.println("Erro ao deletar cliente - " + e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class ClienteDAO {
             instrucao.execute();
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro na inserção do cliente" + e.getMessage());
+            System.out.println("Erro na inserção do cliente - " + e.getMessage());
         }
     }
 }

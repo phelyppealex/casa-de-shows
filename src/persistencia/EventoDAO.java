@@ -84,7 +84,7 @@ public class EventoDAO {
             instrucao.execute();
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro ao inserir evento");
+            System.out.println("Erro ao inserir evento - " + e.getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ public class EventoDAO {
             instrucao.execute();
             c.desconectar();
         }catch(Exception e){
-            System.out.println("Erro ao deletar evento");
+            System.out.println("Erro ao deletar evento - " + e.getMessage());
         }
     }
 }
