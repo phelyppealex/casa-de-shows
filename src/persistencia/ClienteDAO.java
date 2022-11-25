@@ -27,9 +27,9 @@ public class ClienteDAO {
             ResultSet rs = instrucao.executeQuery(REL);
             while (rs.next()){
                 cliente = new Cliente(
-                        rs.getString("cpf"), rs.getString("nome"),
-                        rs.getString("telefone"), rs.getString("email"),
-                        rs.getString("login"), rs.getString("senha")
+                    rs.getString("cpf"), rs.getString("nome"),
+                    rs.getString("telefone"), rs.getString("email"),
+                    rs.getString("login"), rs.getString("senha")
                 );
                 lista.add(cliente);
             }
@@ -49,9 +49,9 @@ public class ClienteDAO {
             ResultSet rs = instrucao.executeQuery();
             if(rs.next()){
                 cliente = new Cliente(
-                        rs.getString("cpf"), rs.getString("nome"),
-                        rs.getString("telefone"), rs.getString("email"),
-                        rs.getString("login"), rs.getString("senha")
+                    rs.getString("cpf"), rs.getString("nome"),
+                    rs.getString("telefone"), rs.getString("email"),
+                    rs.getString("login"), rs.getString("senha")
                 );
             }
             c.desconectar();
