@@ -99,4 +99,10 @@ public class EventoDAO {
             System.out.println("Erro ao deletar evento - " + e.getMessage());
         }
     }
+
+    public void atualizar(Evento evento){
+        Evento e = buscar(evento.getId());
+        deletar(e.getId());
+        inserir(evento);
+    }
 }

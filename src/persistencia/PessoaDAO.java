@@ -81,4 +81,10 @@ public class PessoaDAO {
             System.out.println("Erro na exclusão de Pessoa - " + e.getMessage());
         }
     }
+
+    public void atualizar(Pessoa people){
+        Pessoa p = buscar(people.getCpf());
+        deletar(p.getCpf());
+        inserir(people);
+    }
 }

@@ -91,4 +91,10 @@ public class IngressoDAO {
             System.out.println("Erro ao deletar Ingresso" + e.getMessage());
         }
     }
+
+    public void atualizar(Ingresso ticket){
+        Ingresso i = buscar(ticket.getId());
+        deletar(i.getId());
+        inserir(ticket);
+    }
 }

@@ -90,6 +90,12 @@ public class ClienteDAO {
             System.out.println("Erro na inserção do cliente - " + e.getMessage());
         }
     }
+
+    public void atualizar(Cliente clienteUp){
+        Cliente client = buscar(clienteUp.getCpf());
+        deletar(client.getCpf());
+        inserir(clienteUp);
+    }
 }
 
 
