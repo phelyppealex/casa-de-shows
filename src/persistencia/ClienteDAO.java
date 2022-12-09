@@ -15,7 +15,7 @@ public class ClienteDAO {
     private final String INS = "INSERT INTO cliente(cpf,nome,telefone,email,login,senha) VALUES (?,?,?,?,?,?)";
 
     public ClienteDAO(){
-        c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
+        c = new Conexao();
     }
 
     public ArrayList<Cliente> listar(){

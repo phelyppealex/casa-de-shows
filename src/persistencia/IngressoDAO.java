@@ -14,7 +14,7 @@ public class IngressoDAO {
     private final String DEL = "DELETE FROM ingresso WHERE id=?";
 
     public IngressoDAO(){
-        c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
+        c = new Conexao();
     }
 
     public ArrayList<Ingresso> listar(){

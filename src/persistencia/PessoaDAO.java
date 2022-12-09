@@ -13,7 +13,7 @@ public class PessoaDAO {
     private final String DEL = "DELETE FROM pessoa WHERE cpf=?";
 
     public PessoaDAO() {
-        c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
+        c = new Conexao();
     }
 
     public Pessoa buscar(String cpf){

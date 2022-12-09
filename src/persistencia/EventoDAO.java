@@ -15,7 +15,7 @@ public class EventoDAO {
     private final String INS = "INSERT INTO evento(nomeevento,data_event,hora,capacidade,rua,numero,bairro,cidade,uf,preco) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     public EventoDAO(){
-        c = new Conexao("jdbc:postgresql://localhost:5432/BDCasaDeFestas","postgres","1234");
+        c = new Conexao();
     }
 
     public ArrayList<Evento> listar(){

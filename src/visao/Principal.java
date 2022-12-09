@@ -42,133 +42,139 @@ public class Principal {
                     System.out.print("DIGITE SUA SENHA: ");
                     senha = sc.nextLine();
 
-                    System.out.println("\nMENU DO CLIENTE");
-                    System.out.println("-----------------");
-                    System.out.println("1- CRIAR EVENTO");
-                    System.out.println("2- LISTAR EVENTOS");
-                    System.out.println("3- EDITAR EVENTO");
-                    System.out.println("4- REMOVER EVENTO");
+                    String respostaCliente = "";
                     
-                    String respostaCliente = sc.nextLine();
+                    do{
+                        System.out.println("\nMENU DO CLIENTE");
+                        System.out.println("-----------------");
+                        System.out.println("1- CRIAR EVENTO");
+                        System.out.println("2- LISTAR EVENTOS");
+                        System.out.println("3- EDITAR EVENTO");
+                        System.out.println("4- REMOVER EVENTO");
+                        System.out.println("0- VOLTAR");
 
-                    switch(respostaCliente){
-                        // CRIAR EVENTO - MENU DO CLIENTE
-                        case "1":
-                            Evento event = new Evento();
-                            System.out.println("\nCADASTRO DE EVENTO");
-                            System.out.println("------------------");
-                            event.setId(0);
+                        respostaCliente = sc.nextLine();
 
-                            System.out.print("DESCRIÇÃO DO EVENTO:");
-                            event.setNomeEvento(sc.nextLine());
-                            
-                            System.out.print("DATA: ");
-                            event.setData(sc.nextLine());
+                        switch(respostaCliente){
+                            // CRIAR EVENTO - MENU DO CLIENTE
+                            case "1":
+                                Evento event = new Evento();
+                                System.out.println("\nCADASTRO DE EVENTO");
+                                System.out.println("------------------");
+                                event.setId(0);
 
-                            System.out.print("HORA: ");
-                            event.setHora(sc.nextLine());
+                                System.out.print("DESCRIÇÃO DO EVENTO:");
+                                event.setNomeEvento(sc.nextLine());
+                                
+                                System.out.print("DATA: ");
+                                event.setData(sc.nextLine());
 
-                            System.out.print("CAPACIDADE: ");
-                            event.setCapacidade(sc.nextInt());
+                                System.out.print("HORA: ");
+                                event.setHora(sc.nextLine());
 
-                            System.out.print("PREÇO DO INGRESSO: ");
-                            event.setPreco(sc.nextDouble());
+                                System.out.print("CAPACIDADE: ");
+                                event.setCapacidade(sc.nextInt());
 
-                            System.out.println("LOCALIDADE=");
-                            System.out.print("RUA: ");
-                            event.setRua(sc.nextLine());
+                                System.out.print("PREÇO DO INGRESSO: ");
+                                event.setPreco(sc.nextDouble());
 
-                            System.out.print("NÚMERO: ");
-                            event.setNumero(sc.nextInt());
+                                System.out.println("LOCALIDADE=");
+                                System.out.print("RUA: ");
+                                event.setRua(sc.nextLine());
 
-                            System.out.print("BAIRRO: ");
-                            event.setBairro(sc.nextLine());
-                            
-                            System.out.print("CIDADE: ");
-                            event.setCidade(sc.nextLine());
-                            
-                            System.out.print("UF: ");
-                            event.setUF(sc.nextLine());
+                                System.out.print("NÚMERO: ");
+                                event.setNumero(sc.nextInt());
 
-                            daoEvento.inserir(event);
-                            System.out.println("INSERIDO COM SUCESSO");
-                        break;
-                        // LISTAR EVENTOS - MENU DO CLIENTE
-                        case "2":
-                            ArrayList<Evento> listaEventos = daoEvento.listar();
-                            System.out.println("\nMEUS EVENTOS");
-                            System.out.println("--------------------");
+                                System.out.print("BAIRRO: ");
+                                event.setBairro(sc.nextLine());
+                                
+                                System.out.print("CIDADE: ");
+                                event.setCidade(sc.nextLine());
+                                
+                                System.out.print("UF: ");
+                                event.setUF(sc.nextLine());
 
-                            for(Evento e: listaEventos){
-                                System.out.println(
-                                    "ID: " + e.getId() +
-                                    "\n" + e.getNomeEvento() +
-                                    "\n" + e.getData() + ", " + e.getHora() +
-                                    "\nCapacidade: " + e.getCapacidade() +
-                                    "\nIngresso: R$ " + e.getPreco() +
-                                    "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n"
-                                );
-                            }
-                        break;
-                        // EDITAR EVENTO - MENU CLIENTE
-                        case "3": 
-                            System.out.println("EDITAR EVENTO");
-                            System.out.println("--------------");
-                            System.out.println("QUAL O ID DO EVENTO  QUE DESEJA EDITAR?");
-                            respostaAUX = sc.nextInt();
-                            do{
-                                System.out.println("1-NOME");
-                                System.out.println("2-DATA");
-                                System.out.println("3-HORA");
-                                System.out.println("4-CAPACIDADE");
-                                System.out.println("5-RUA");
-                                System.out.println("6-NUMERO");
-                                System.out.println("7-BAIRRO");
-                                System.out.println("8-CIDADE");
-                                System.out.println("9-UF");
-                                System.out.println("10-PRECO DO INGRESSO");
-                                System.out.println("0-SAIR");
-                                respostaCliente = sc.nextLine();
-                                switch(respostaCliente){
-                                    case "1":
-                                    break;
-                                    case "2":
-                                    break;
-                                    case "3":
-                                    break;
-                                    case "4":
-                                    break;
-                                    case "5":
-                                    break;
-                                    case "6":
-                                    break;
-                                    case "7":
-                                    break;
-                                    case "8":
-                                    break;
-                                    case "9":
-                                    break;
-                                    case "10":
-                                    break;
+                                daoEvento.inserir(event);
+                                System.out.println("INSERIDO COM SUCESSO");
+                            break;
+                            // LISTAR EVENTOS - MENU DO CLIENTE
+                            case "2":
+                                ArrayList<Evento> listaEventos = daoEvento.listar();
+                                System.out.println("\nMEUS EVENTOS");
+                                System.out.println("--------------------");
+
+                                for(Evento e: listaEventos){
+                                    System.out.println(
+                                        "ID: " + e.getId() +
+                                        "\n" + e.getNomeEvento() +
+                                        "\n" + e.getData() + ", " + e.getHora() +
+                                        "\nCapacidade: " + e.getCapacidade() +
+                                        "\nIngresso: R$ " + e.getPreco() +
+                                        "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n"
+                                    );
                                 }
-                            }while(respostaCliente!="0");
-                        break;
-                        // REMOÇÃO DE EVENTO - MENU DO CLIENTE
-                        case "4":
-                            System.out.println("REMOVER EVENTO");
-                            System.out.println("--------------");
-                            
-                            System.out.print("ID DO EVENTO A SER REMOVIDO: ");
-                            respostaAUX = sc.nextInt();
-                            
-                            System.out.print("TEM CERTEZA? 1-SIM 0-VOLTAR: ");
-                            
-                            if(sc.nextInt() == 1){
-                                daoEvento.deletar(respostaAUX);
-                            }
-                        break;
-                    }
-                    
+                            break;
+                            // EDITAR EVENTO - MENU CLIENTE
+                            case "3": 
+                                System.out.println("EDITAR EVENTO");
+                                System.out.println("--------------");
+                                System.out.println("QUAL O ID DO EVENTO  QUE DESEJA EDITAR?");
+                                respostaAUX = sc.nextInt();
+
+                                do{
+                                    System.out.println("1-NOME");
+                                    System.out.println("2-DATA");
+                                    System.out.println("3-HORA");
+                                    System.out.println("4-CAPACIDADE");
+                                    System.out.println("5-RUA");
+                                    System.out.println("6-NUMERO");
+                                    System.out.println("7-BAIRRO");
+                                    System.out.println("8-CIDADE");
+                                    System.out.println("9-UF");
+                                    System.out.println("10-PRECO DO INGRESSO");
+                                    System.out.println("0-SAIR");
+                                    respostaCliente = sc.nextLine();
+
+                                    switch(respostaCliente){
+                                        case "1":
+                                        break;
+                                        case "2":
+                                        break;
+                                        case "3":
+                                        break;
+                                        case "4":
+                                        break;
+                                        case "5":
+                                        break;
+                                        case "6":
+                                        break;
+                                        case "7":
+                                        break;
+                                        case "8":
+                                        break;
+                                        case "9":
+                                        break;
+                                        case "10":
+                                        break;
+                                    }
+                                }while(respostaCliente!="0");
+                            break;
+                            // REMOÇÃO DE EVENTO - MENU DO CLIENTE
+                            case "4":
+                                System.out.println("REMOVER EVENTO");
+                                System.out.println("--------------");
+                                
+                                System.out.print("ID DO EVENTO A SER REMOVIDO: ");
+                                respostaAUX = sc.nextInt();
+                                
+                                System.out.print("TEM CERTEZA? 1-SIM 0-VOLTAR: ");
+                                
+                                if(sc.nextInt() == 1){
+                                    daoEvento.deletar(respostaAUX);
+                                }
+                            break;
+                        }
+                    }while();
                 break;
                 // CADASTRO DO CLIENTE - MENU PRINCIPAL
                 case "2":
