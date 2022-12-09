@@ -11,8 +11,6 @@ import persistencia.PessoaDAO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.w3c.dom.events.Event;
-
 public class Principal {
     public static void main(String[] args){
         ClienteDAO daoCliente = new ClienteDAO();
@@ -25,7 +23,7 @@ public class Principal {
         String resposta = "";
         
         do{
-            System.out.println("MENU PRINCIPAL");
+            System.out.println("\nMENU PRINCIPAL");
             System.out.println("---------------");
             System.out.println("1- LOGIN CLIENTE");
             System.out.println("2- CADASTRO CLIENTE");
@@ -39,12 +37,12 @@ public class Principal {
             switch(resposta){
                 // LOGIN DO CLIENTE - MENU PRINCIPAL
                 case "1":
-                    System.out.print("\nDIGITE SEU LOGIN: ");
+                    System.out.println("\nDIGITE SEU LOGIN: ");
                     login = sc.nextLine();
                     System.out.print("DIGITE SUA SENHA: ");
                     senha = sc.nextLine();
 
-                    System.out.println("MENU DO CLIENTE");
+                    System.out.println("\nMENU DO CLIENTE");
                     System.out.println("-----------------");
                     System.out.println("1- CRIAR EVENTO");
                     System.out.println("2- LISTAR EVENTOS");
@@ -54,9 +52,10 @@ public class Principal {
                     String respostaCliente = sc.nextLine();
 
                     switch(respostaCliente){
+                        // CRIAR EVENTO - MENU DO CLIENTE
                         case "1":
                             Evento event = new Evento();
-                            System.out.println("CADASTRO DE EVENTO");
+                            System.out.println("\nCADASTRO DE EVENTO");
                             System.out.println("------------------");
                             event.setId(0);
 
@@ -94,9 +93,10 @@ public class Principal {
                             daoEvento.inserir(event);
                             System.out.println("INSERIDO COM SUCESSO");
                         break;
+                        // LISTAR EVENTOS - MENU DO CLIENTE
                         case "2":
                             ArrayList<Evento> listaEventos = daoEvento.listar();
-                            System.out.println("MEUS EVENTOS");
+                            System.out.println("\nMEUS EVENTOS");
                             System.out.println("--------------------");
 
                             for(Evento e: listaEventos){
@@ -109,9 +109,11 @@ public class Principal {
                                     "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n"
                                 );
                             }
+                        break;
+                        // EDITAR EVENTO - MENU CLIENTE
                         case "3": 
                             System.out.println("EDITAR EVENTO");
-                            System.out.println("-------------");
+                            System.out.println("--------------");
                             System.out.println("QUAL O ID DO EVENTO  QUE DESEJA EDITAR?");
                             respostaAUX = sc.nextInt();
                             do{
@@ -149,12 +151,9 @@ public class Principal {
                                     case "10":
                                     break;
                                 }
-
-
                             }while(respostaCliente!="0");
-
                         break;
-                        
+                        // REMOÇÃO DE EVENTO - MENU DO CLIENTE
                         case "4":
                             System.out.println("REMOVER EVENTO");
                             System.out.println("--------------");
@@ -162,10 +161,9 @@ public class Principal {
                             System.out.print("ID DO EVENTO A SER REMOVIDO: ");
                             respostaAUX = sc.nextInt();
                             
-                            System.out.print("TEM CERTEZA? 1-SIM 0-NAO: ");
-                            respostaCliente = sc.nextLine();
+                            System.out.print("TEM CERTEZA? 1-SIM 0-VOLTAR: ");
                             
-                            if(respostaCliente != "1"){
+                            if(sc.nextInt() == 1){
                                 daoEvento.deletar(respostaAUX);
                             }
                         break;
