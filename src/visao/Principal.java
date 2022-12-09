@@ -19,6 +19,7 @@ public class Principal {
         EventoDAO daoEvento = new EventoDAO();
         IngressoDAO daoIngresso = new IngressoDAO();
         PessoaDAO daoPessoa = new PessoaDAO();
+        
         int respostaAUX = 0;
         Scanner sc = new Scanner(System.in);
         String resposta = "";
@@ -36,6 +37,7 @@ public class Principal {
             String login,senha = "";
 
             switch(resposta){
+                // LOGIN DO CLIENTE - MENU PRINCIPAL
                 case "1":
                     System.out.print("\nDIGITE SEU LOGIN: ");
                     login = sc.nextLine();
@@ -43,7 +45,7 @@ public class Principal {
                     senha = sc.nextLine();
 
                     System.out.println("MENU DO CLIENTE");
-                    System.out.println("------------------");
+                    System.out.println("-----------------");
                     System.out.println("1- CRIAR EVENTO");
                     System.out.println("2- LISTAR EVENTOS");
                     System.out.println("3- EDITAR EVENTO");
@@ -170,6 +172,7 @@ public class Principal {
                     }
                     
                 break;
+                // CADASTRO DO CLIENTE - MENU PRINCIPAL
                 case "2":
                     Cliente client = new Cliente();    
                     System.out.println("\nCADASTRO DE CLIENTE");
@@ -197,7 +200,7 @@ public class Principal {
                     System.out.println("INSERIDO COM SUCESSO!");
                     
                 break;
-
+                // COMPRA DE INGRESSO - MENU PRINCIPAL
                 case "3":
                     do{
                         ArrayList<Evento> listaEventos = daoEvento.listar();
@@ -215,7 +218,7 @@ public class Principal {
                     }while(resposta != "0");
                     
                 break;
-
+                // TELEFONES PARA CONTATO - MENU PRINCIPAL
                 case "4":
                     System.out.println("SAC");
                     System.out.println("----------");
