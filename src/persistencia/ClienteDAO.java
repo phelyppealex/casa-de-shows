@@ -83,12 +83,12 @@ public class ClienteDAO {
             instrucao.setString(3,cliente.getTelefone());
             instrucao.setString(4,cliente.getEmail());
             instrucao.setString(5,cliente.getSenha());
-            if(instrucao.execute())
-                System.out.println("INSERIDO COM SUCESSO!");
+            instrucao.execute();
             c.desconectar();
         }catch(Exception e){
             System.out.println("Erro na inserção do cliente - " + e.getMessage());
         }
+
     }
 
     public void atualizar(Cliente clienteUp){

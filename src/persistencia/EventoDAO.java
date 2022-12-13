@@ -13,6 +13,7 @@ public class EventoDAO {
     private final String BSC = "SELECT * FROM evento WHERE id=?";
     private final String DEL = "DELETE FROM evento WHERE id=?";
     private final String INS = "INSERT INTO evento(nomeevento,data_event,hora,capacidade,rua,numero,bairro,cidade,uf,preco) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private final String ULT = "SELECT * FROM evento ORDER BY id DESC LIMIT 1";
 
     public EventoDAO(){
         c = new Conexao();
@@ -87,6 +88,28 @@ public class EventoDAO {
         }catch(Exception e){
             System.out.println("Erro ao inserir evento - " + e.getMessage());
         }
+    }
+
+    public Evento pegarUltimo(){
+        Evento event = null;
+        try {
+            c.conectar();
+            Statement instrucao = c.getConexao().createStatement();
+            ResultSet rs = instrucao.executeQuery(ULT);
+            rs.next();
+            event = new Evento(
+                rs.getInt("id"), rs.getString("nomeevento"),
+                rs.getString("data_event"), rs.getString("hora"),
+                rs.getInt("capacidade"), rs.getString("rua"),
+                rs.getInt("numero"), rs.getString("bairro"),
+                rs.getString("cidade"), rs.getString("uf"),
+                rs.getDouble("preco")
+            );
+            c.desconectar();
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar último evento - " + e.getMessage());
+        }
+        return event;
     }
 
     public void deletar(int id){
