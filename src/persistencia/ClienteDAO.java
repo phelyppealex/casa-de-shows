@@ -83,7 +83,8 @@ public class ClienteDAO {
             instrucao.setString(3,cliente.getTelefone());
             instrucao.setString(4,cliente.getEmail());
             instrucao.setString(5,cliente.getSenha());
-            instrucao.execute();
+            if(instrucao.execute())
+                System.out.println("INSERIDO COM SUCESSO!");
             c.desconectar();
         }catch(Exception e){
             System.out.println("Erro na inserção do cliente - " + e.getMessage());
@@ -97,7 +98,7 @@ public class ClienteDAO {
     }
 
     public boolean validarLogin(String login, String senha){
-        if(buscar(login) != null && buscar(login).getSenha() == senha){
+        if(buscar(login) != null && buscar(login).getSenha().equals(senha)){
             return true;
         }
         System.out.println("Login ou senha incorretos");

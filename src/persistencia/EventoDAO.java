@@ -81,7 +81,8 @@ public class EventoDAO {
             instrucao.setString(8,event.getCidade());
             instrucao.setString(9,event.getUF());
             instrucao.setDouble(10,event.getPreco());
-            instrucao.execute();
+            if(instrucao.execute())
+                System.out.println("INSERIDO COM SUCESSO");
             c.desconectar();
         }catch(Exception e){
             System.out.println("Erro ao inserir evento - " + e.getMessage());

@@ -50,7 +50,6 @@ public class ClienteEventoDAO {
                 Evento e = daoEvento.buscar(
                     rs.getInt("fk_evento")
                 );
-
                 ce = new ClienteEvento(c,e);
                 lista.add(ce);
             }
@@ -61,4 +60,6 @@ public class ClienteEventoDAO {
 
         return lista;
     }
+
+    
 }

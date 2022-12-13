@@ -23,12 +23,13 @@ public class Principal {
         
         do{
             System.out.println("\nMENU PRINCIPAL");
-            System.out.println("---------------");
+            System.out.println("-------------------");
             System.out.println("1- LOGIN CLIENTE");
             System.out.println("2- CADASTRO CLIENTE");
-            System.out.println("3- COMPRA DE INGRESSO");
-            System.out.println("4- CONTATO (SAC)");
-            System.out.println("0- SAIR");
+            System.out.println("3- MOSTRAR CLIENTES");
+            System.out.println("4- COMPRA DE INGRESSO");
+            System.out.println("5- CONTATO (SAC)");
+            System.out.println("0- SAIR\n");
             resposta = sc.nextLine();
 
             String login,senha = "";
@@ -36,7 +37,8 @@ public class Principal {
             switch(resposta){
                 // LOGIN DO CLIENTE - MENU PRINCIPAL
                 case "1":
-                    System.out.println("\nDIGITE SEU CPF: ");
+                    System.out.println();
+                    System.out.print("DIGITE SEU CPF: ");
                     login = sc.nextLine();
                     System.out.print("DIGITE SUA SENHA: ");
                     senha = sc.nextLine();
@@ -46,16 +48,23 @@ public class Principal {
                     String respostaCliente = "";
                     
                     do{
-                        System.out.println("\nMENU DO CLIENTE");
-                        System.out.println("-----------------");
-                        System.out.println("1- CRIAR EVENTO");
-                        System.out.println("2- LISTAR EVENTOS");
-                        System.out.println("3- EDITAR EVENTO");
-                        System.out.println("4- REMOVER EVENTO");
-                        System.out.println("0- VOLTAR");
+                        if(daoCliente.buscar(login) != null){
+                            System.out.println("\nMENU DO CLIENTE");
+                            System.out.println("---------------------");
+                            System.out.println("1- CRIAR EVENTO");
+                            System.out.println("2- LISTAR EVENTOS");
+                            System.out.println("3- EDITAR EVENTO");
+                            System.out.println("4- REMOVER EVENTO");
+                            System.out.println("5- DELETAR CONTA");
+                            System.out.println("0- VOLTAR\n");
 
+                            respostaCliente = sc.nextLine();
+                        }else{
+                            System.out.println("Esta conta não existe mais!");
+                            respostaCliente = "0";
+                        }
+                        
                         int idEvento;
-                        respostaCliente = sc.nextLine();
 
                         switch(respostaCliente){
                             // CRIAR EVENTO - MENU DO CLIENTE
@@ -97,7 +106,6 @@ public class Principal {
                                 event.setUF(sc.nextLine());
 
                                 daoEvento.inserir(event);
-                                System.out.println("INSERIDO COM SUCESSO");
                             break;
                             // LISTAR EVENTOS - MENU DO CLIENTE
                             case "2":
@@ -197,6 +205,9 @@ public class Principal {
                                     daoEvento.deletar(idEvento);
                                 }
                             break;
+                            case "5":
+                                daoCliente.deletar(login);
+                            break;
                         }
                     }while(respostaCliente != "0");
                 break;
@@ -204,10 +215,7 @@ public class Principal {
                 case "2":
                     Cliente client = new Cliente();    
                     System.out.println("\nCADASTRO DE CLIENTE");
-                    System.out.println("-------------------");
-
-                    System.out.print("\nSENHA: ");
-                    client.setSenha(sc.nextLine());
+                    System.out.println("---------------------");
 
                     System.out.print("\nNOME COMPLETO: ");
                     client.setNome(sc.nextLine());
@@ -215,22 +223,38 @@ public class Principal {
                     System.out.print("\nCPF: ");
                     client.setCpf(sc.nextLine());
                     
-                    System.out.print("\nTELEFONE:");
-                    client.setCpf(sc.nextLine());
+                    System.out.print("\nTELEFONE: ");
+                    client.setTelefone(sc.nextLine());
                     
-                    System.out.print("\nE-MAIL:");
-                    client.setCpf(sc.nextLine());
+                    System.out.print("\nE-MAIL: ");
+                    client.setEmail(sc.nextLine());
+
+                    System.out.print("\nSENHA: ");
+                    client.setSenha(sc.nextLine());
 
                     daoCliente.inserir(client);
-                    System.out.println("INSERIDO COM SUCESSO!");
-                    
+                break;
+                // MOSTRAR CLIENTES - MENU PRINCIPAL
+                case "3":
+                    ArrayList<Cliente> lClientes = daoCliente.listar();
+                    System.out.println("\nLISTA DE CLIENTES");
+                    System.out.print("-------------------");
+
+                    for(Cliente c: lClientes){
+                        System.out.println(
+                            "\nNome: " + c.getNome() +
+                            "\nCPF: " + c.getCpf() +
+                            "\nContato: " + c.getTelefone() + " - " + c.getEmail() +
+                            "\n------------------------------------------"
+                        );
+                    }
                 break;
                 // COMPRA DE INGRESSO - MENU PRINCIPAL
-                case "3":
+                case "4":
                     int numeroDoEvento;
                     do{
                         ArrayList<Evento> listaEventos = daoEvento.listar();
-                        System.out.println("EVENTOS");
+                        System.out.println("ESCOLHA O EVENTO");
                         System.out.println("------------------------");
                         for(int i = 0; i < listaEventos.size(); i++){
                             System.out.println((i+1) + "- " + listaEventos.get(i).getNomeEvento() + "|" + listaEventos.get(i).getData() + " às " + listaEventos.get(i).getHora());
@@ -242,10 +266,9 @@ public class Principal {
                         resposta = sc.nextLine();
 
                     }while(resposta != "0");
-                    
                 break;
                 // TELEFONES PARA CONTATO - MENU PRINCIPAL
-                case "4":
+                case "5":
                     System.out.println("SAC");
                     System.out.println("----------------------------------");
                     System.out.println("Zona metropolitana (84) 99410-0804");
