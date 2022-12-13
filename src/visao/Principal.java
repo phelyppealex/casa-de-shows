@@ -18,7 +18,6 @@ public class Principal {
         IngressoDAO daoIngresso = new IngressoDAO();
         PessoaDAO daoPessoa = new PessoaDAO();
         
-        int respostaAUX = 0;
         Scanner sc = new Scanner(System.in);
         String resposta = "";
         
@@ -37,10 +36,12 @@ public class Principal {
             switch(resposta){
                 // LOGIN DO CLIENTE - MENU PRINCIPAL
                 case "1":
-                    System.out.println("\nDIGITE SEU LOGIN: ");
+                    System.out.println("\nDIGITE SEU CPF: ");
                     login = sc.nextLine();
                     System.out.print("DIGITE SUA SENHA: ");
                     senha = sc.nextLine();
+
+                    daoCliente.validarLogin(login, senha);
 
                     String respostaCliente = "";
                     
@@ -53,6 +54,7 @@ public class Principal {
                         System.out.println("4- REMOVER EVENTO");
                         System.out.println("0- VOLTAR");
 
+                        int idEvento;
                         respostaCliente = sc.nextLine();
 
                         switch(respostaCliente){
@@ -110,7 +112,8 @@ public class Principal {
                                         "\n" + e.getData() + ", " + e.getHora() +
                                         "\nCapacidade: " + e.getCapacidade() +
                                         "\nIngresso: R$ " + e.getPreco() +
-                                        "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n"
+                                        "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
+                                        "-----------------------------------------------"
                                     );
                                 }
                             break;
@@ -118,46 +121,68 @@ public class Principal {
                             case "3": 
                                 System.out.println("EDITAR EVENTO");
                                 System.out.println("--------------");
-                                System.out.println("QUAL O ID DO EVENTO  QUE DESEJA EDITAR?");
-                                respostaAUX = sc.nextInt();
+                                System.out.println("QUAL O ID DO EVENTO (NÚMERO INTEIRO) QUE DESEJA EDITAR?");
+                                idEvento = sc.nextInt();
 
-                                do{
-                                    System.out.println("1-NOME");
-                                    System.out.println("2-DATA");
-                                    System.out.println("3-HORA");
-                                    System.out.println("4-CAPACIDADE");
-                                    System.out.println("5-RUA");
-                                    System.out.println("6-NUMERO");
-                                    System.out.println("7-BAIRRO");
-                                    System.out.println("8-CIDADE");
-                                    System.out.println("9-UF");
-                                    System.out.println("10-PRECO DO INGRESSO");
-                                    System.out.println("0-SAIR");
-                                    respostaCliente = sc.nextLine();
+                                Evento e = daoEvento.buscar(idEvento);
+                                System.out.println(
+                                    "-----------------------------------------------\n" +
+                                    "ID: " + e.getId() +
+                                    "\n" + e.getNomeEvento() +
+                                    "\n" + e.getData() + ", " + e.getHora() +
+                                    "\nCapacidade: " + e.getCapacidade() +
+                                    "\nIngresso: R$ " + e.getPreco() +
+                                    "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
+                                    "-----------------------------------------------"
+                                );
 
-                                    switch(respostaCliente){
-                                        case "1":
-                                        break;
-                                        case "2":
-                                        break;
-                                        case "3":
-                                        break;
-                                        case "4":
-                                        break;
-                                        case "5":
-                                        break;
-                                        case "6":
-                                        break;
-                                        case "7":
-                                        break;
-                                        case "8":
-                                        break;
-                                        case "9":
-                                        break;
-                                        case "10":
-                                        break;
-                                    }
-                                }while(respostaCliente!="0");
+                                System.out.println("1-NOME");
+                                System.out.println("2-DATA");
+                                System.out.println("3-HORA");
+                                System.out.println("4-CAPACIDADE");
+                                System.out.println("5-RUA");
+                                System.out.println("6-NUMERO");
+                                System.out.println("7-BAIRRO");
+                                System.out.println("8-CIDADE");
+                                System.out.println("9-UF");
+                                System.out.println("10-PRECO DO INGRESSO");
+                                System.out.println("0-SAIR");
+                                respostaCliente = sc.nextLine();
+
+                                System.out.println("Insira o novo valor:");
+                                switch(respostaCliente){
+                                    case "1":
+                                        e.setNomeEvento(sc.nextLine());
+                                    break;
+                                    case "2":
+                                        e.setData(sc.nextLine());
+                                    break;
+                                    case "3":
+                                        e.setHora(sc.nextLine());
+                                    break;
+                                    case "4":
+                                        e.setCapacidade(sc.nextInt());
+                                    break;
+                                    case "5":
+                                        e.setRua(sc.nextLine());
+                                    break;
+                                    case "6":
+                                        e.setNumero(sc.nextInt());
+                                    break;
+                                    case "7":
+                                        e.setBairro(sc.nextLine());
+                                    break;
+                                    case "8":
+                                        e.setCidade(sc.nextLine());
+                                    break;
+                                    case "9":
+                                        e.setUF(sc.nextLine());
+                                    break;
+                                    case "10":
+                                        e.setPreco(sc.nextDouble());
+                                    break;
+                                }
+                                daoEvento.atualizar(e);
                             break;
                             // REMOÇÃO DE EVENTO - MENU DO CLIENTE
                             case "4":
@@ -165,25 +190,21 @@ public class Principal {
                                 System.out.println("--------------");
                                 
                                 System.out.print("ID DO EVENTO A SER REMOVIDO: ");
-                                respostaAUX = sc.nextInt();
+                                idEvento = sc.nextInt();
                                 
                                 System.out.print("TEM CERTEZA? 1-SIM 0-VOLTAR: ");
-                                
                                 if(sc.nextInt() == 1){
-                                    daoEvento.deletar(respostaAUX);
+                                    daoEvento.deletar(idEvento);
                                 }
                             break;
                         }
-                    }while();
+                    }while(respostaCliente != "0");
                 break;
                 // CADASTRO DO CLIENTE - MENU PRINCIPAL
                 case "2":
                     Cliente client = new Cliente();    
                     System.out.println("\nCADASTRO DE CLIENTE");
                     System.out.println("-------------------");
-                    
-                    System.out.print("\nUSUARIO DE LOGIN: ");
-                    client.setLogin(sc.nextLine());
 
                     System.out.print("\nSENHA: ");
                     client.setSenha(sc.nextLine());
@@ -206,14 +227,15 @@ public class Principal {
                 break;
                 // COMPRA DE INGRESSO - MENU PRINCIPAL
                 case "3":
+                    int numeroDoEvento;
                     do{
                         ArrayList<Evento> listaEventos = daoEvento.listar();
                         System.out.println("EVENTOS");
-                        System.out.println("----------");
+                        System.out.println("------------------------");
                         for(int i = 0; i < listaEventos.size(); i++){
-                            System.out.println((i+1) + "- " + listaEventos.get(i).getNomeEvento());
+                            System.out.println((i+1) + "- " + listaEventos.get(i).getNomeEvento() + "|" + listaEventos.get(i).getData() + " às " + listaEventos.get(i).getHora());
                         }
-                        respostaAUX = sc.nextInt();
+                        numeroDoEvento = sc.nextInt();
                         System.out.println("ENTRADA PARA");
                         
                         System.out.print("CONTINUAR? 0-NAO 1-SIM: ");

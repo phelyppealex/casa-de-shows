@@ -12,7 +12,7 @@ public class ClienteDAO {
     private final String REL = "SELECT * FROM cliente";
     private final String BSC = "SELECT * FROM cliente WHERE cpf=?";
     private final String DEL = "DELETE FROM cliente WHERE cpf=?";
-    private final String INS = "INSERT INTO cliente(cpf,nome,telefone,email,login,senha) VALUES (?,?,?,?,?,?)";
+    private final String INS = "INSERT INTO cliente(cpf,nome,telefone,email,senha) VALUES (?,?,?,?,?)";
 
     public ClienteDAO(){
         c = new Conexao();
@@ -29,7 +29,7 @@ public class ClienteDAO {
                 cliente = new Cliente(
                     rs.getString("cpf"), rs.getString("nome"),
                     rs.getString("telefone"), rs.getString("email"),
-                    rs.getString("login"), rs.getString("senha")
+                    rs.getString("senha")
                 );
                 lista.add(cliente);
             }
@@ -51,7 +51,7 @@ public class ClienteDAO {
                 cliente = new Cliente(
                     rs.getString("cpf"), rs.getString("nome"),
                     rs.getString("telefone"), rs.getString("email"),
-                    rs.getString("login"), rs.getString("senha")
+                    rs.getString("senha")
                 );
             }
             c.desconectar();
@@ -82,8 +82,7 @@ public class ClienteDAO {
             instrucao.setString(2,cliente.getNome());
             instrucao.setString(3,cliente.getTelefone());
             instrucao.setString(4,cliente.getEmail());
-            instrucao.setString(5,cliente.getLogin());
-            instrucao.setString(6,cliente.getSenha());
+            instrucao.setString(5,cliente.getSenha());
             instrucao.execute();
             c.desconectar();
         }catch(Exception e){
@@ -96,6 +95,13 @@ public class ClienteDAO {
         deletar(client.getCpf());
         inserir(clienteUp);
     }
+
+    public boolean validarLogin(String login, String senha){
+        if(buscar(login) != null && buscar(login).getSenha() == senha){
+            return true;
+        }
+        System.out.println("Login ou senha incorretos");
+
+        return false;
+    }
 }
-
-

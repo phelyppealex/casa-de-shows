@@ -5,19 +5,17 @@ public class Cliente {
     private String cpf;
     private String telefone;
     private String email;
-    private String login;
     private String senha;
 
     public Cliente(){
 
     }
 
-    public Cliente(String cpf, String nome, String telefone, String email, String login, String senha) {
+    public Cliente(String cpf, String nome, String telefone, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
-        this.login = login;
         this.senha = senha;
     }
 
@@ -51,14 +49,6 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getSenha() {
