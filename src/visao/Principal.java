@@ -247,11 +247,9 @@ public class Principal {
                 // TELEFONES PARA CONTATO - MENU PRINCIPAL
                 case "4":
                     System.out.println("SAC");
-                    System.out.println("----------");
-                    System.out.println("Zona Metropolitana (84) 99410-0804");
+                    System.out.println("----------------------------------");
+                    System.out.println("Zona metropolitana (84) 99410-0804");
                     System.out.println("Demais localidades (84) 98170-7242");
-                    System.out.println("1 - Voltar");
-
                 break;
             }
         }while(resposta != "0");

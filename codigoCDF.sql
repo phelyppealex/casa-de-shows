@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS Cliente (
 	nome text, 
 	telefone text,
 	email text,
-	login text,
 	senha text,
 	PRIMARY KEY (cpf)
 );
