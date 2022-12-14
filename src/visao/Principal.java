@@ -130,16 +130,16 @@ public class Principal {
 
                                 for (ClienteEvento e : listaEventos) {
                                     System.out.println(
-                                            "ID: " + e.getEvento().getId() +
-                                                    "\n" + e.getEvento().getNomeEvento() +
-                                                    "\n" + e.getEvento().getData() + ", " + e.getEvento().getHora() +
-                                                    "\nCapacidade: " + e.getEvento().getCapacidade() +
-                                                    "\nIngresso: R$ " + e.getEvento().getPreco() +
-                                                    "\nLocal: " + e.getEvento().getRua() + ", "
-                                                    + e.getEvento().getNumero() +
-                                                    ", " + e.getEvento().getBairro() + " - " + e.getEvento().getCidade()
-                                                    + "/" + e.getEvento().getUF() + "\n" +
-                                                    "-----------------------------------------------");
+                                        "ID: " + e.getEvento().getId() +
+                                        "\n" + e.getEvento().getNomeEvento() +
+                                        "\n" + e.getEvento().getData() + ", " + e.getEvento().getHora() +
+                                        "\nCapacidade: " + e.getEvento().getCapacidade() +
+                                        "\nIngresso: R$ " + e.getEvento().getPreco() +
+                                        "\nLocal: " + e.getEvento().getRua() + ", "
+                                        + e.getEvento().getNumero() +
+                                        ", " + e.getEvento().getBairro() + " - " + e.getEvento().getCidade()
+                                        + "/" + e.getEvento().getUF() + "\n" +
+                                        "-----------------------------------------------");
                                 }
                                 break;
                             // EDITAR EVENTO - MENU CLIENTE
@@ -153,16 +153,19 @@ public class Principal {
 
                                 if (e != null) {
                                     System.out.println(
-                                            "-----------------------------------------------\n" +
-                                                    "ID: " + e.getId() +
-                                                    "\n" + e.getNomeEvento() +
-                                                    "\n" + e.getData() + ", " + e.getHora() +
-                                                    "\nCapacidade: " + e.getCapacidade() +
-                                                    "\nIngresso: R$ " + e.getPreco() +
-                                                    "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", "
-                                                    + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
-                                                    "-----------------------------------------------");
+                                        "-----------------------------------------------\n" +
+                                        "ID: " + e.getId() +
+                                        "\n" + e.getNomeEvento() +
+                                        "\n" + e.getData() + ", " + e.getHora() +
+                                        "\nCapacidade: " + e.getCapacidade() +
+                                        "\nIngresso: R$ " + e.getPreco() +
+                                        "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", "
+                                        + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
+                                        "-----------------------------------------------"
+                                    );
                                 }
+
+
 
                                 System.out.println("1-NOME");
                                 System.out.println("2-DATA");
@@ -181,37 +184,37 @@ public class Principal {
                                 switch (respostaCliente) {
                                     case 1:
                                         e.setNomeEvento(sc.nextLine());
-                                        break;
+                                    break;
                                     case 2:
                                         e.setData(sc.nextLine());
-                                        break;
+                                    break;
                                     case 3:
                                         e.setHora(sc.nextLine());
-                                        break;
+                                    break;
                                     case 4:
                                         e.setCapacidade(sc.nextInt());
-                                        break;
+                                    break;
                                     case 5:
                                         e.setRua(sc.nextLine());
-                                        break;
+                                    break;
                                     case 6:
                                         e.setNumero(sc.nextInt());
-                                        break;
+                                    break;
                                     case 7:
                                         e.setBairro(sc.nextLine());
-                                        break;
+                                    break;
                                     case 8:
                                         e.setCidade(sc.nextLine());
-                                        break;
+                                    break;
                                     case 9:
                                         e.setUF(sc.nextLine());
-                                        break;
+                                    break;
                                     case 10:
                                         e.setPreco(sc.nextDouble());
-                                        break;
+                                    break;
                                 }
                                 daoEvento.atualizar(e);
-                                break;
+                            break;
                             // REMOÇÃO DE EVENTO - MENU DO CLIENTE
                             case 4:
                                 System.out.println("REMOVER EVENTO");
@@ -224,13 +227,13 @@ public class Principal {
                                 if (sc.nextInt() == 1) {
                                     daoEvento.deletar(idEvento);
                                 }
-                                break;
+                            break;
                             case 5:
                                 daoCliente.deletar(login);
-                                break;
+                        break;
                         }
                     } while (respostaCliente != 0);
-                    break;
+                break;
                 // CADASTRO DO CLIENTE - MENU PRINCIPAL
                 case 2:
                     Cliente client = new Cliente();
@@ -254,7 +257,7 @@ public class Principal {
                     client.setSenha(sc.nextLine());
 
                     daoCliente.inserir(client);
-                    break;
+                break;
                 // MOSTRAR CLIENTES - MENU PRINCIPAL
                 case 3:
                     ArrayList<Cliente> lClientes = daoCliente.listar();
@@ -263,81 +266,69 @@ public class Principal {
 
                     for (Cliente c : lClientes) {
                         System.out.println(
-                                "\nNome: " + c.getNome() +
-                                        "\nCPF: " + c.getCpf() +
-                                        "\nContato: " + c.getTelefone() + " - " + c.getEmail() +
-                                        "\n------------------------------------------");
+                            "\nNome: " + c.getNome() +
+                            "\nCPF: " + c.getCpf() +
+                            "\nContato: " + c.getTelefone() + " - " + c.getEmail() +
+                            "\n------------------------------------------"
+                        );
                     }
-                    break;
+                break;
                 // COMPRA DE INGRESSO - MENU PRINCIPAL
                 case 4:
-                    ArrayList<Evento> eventos;
-                    Pessoa pessoa = new Pessoa();
-                    Ingresso ticket;
-                    System.out.println("Digite o CPF da pessoa");
+                    System.out.println("\n  COMPRA DE INGRESSO");
+                    System.out.println("----------------------");
+
+                    Pessoa people = new Pessoa();
+                    Evento event = new Evento();
+                    Ingresso ticket = new Ingresso();
+
+                    System.out.print("INSIRA SEU CPF: ");
                     sc.nextLine();
-                    varAux = sc.nextLine();
-                    if (daoPessoa.buscar(varAux) == null) {
-                        System.out.println("Pessoa não cadastrada");
-                        System.out.println("Cadastrando pessoa...");
-                        System.out.println("Digite o nome da pessoa");
-                        pessoa.setNome(sc.nextLine());
-                        pessoa.setCpf(varAux);
-                        daoPessoa.inserir(pessoa);
+                    people.setCpf(sc.nextLine());
 
-                        eventos = new ArrayList<Evento>();
-                        eventos = daoEvento.listar();
+                    if(daoPessoa.buscar( people.getCpf() ) == null){
+                        System.out.print("INSIRA SEU NOME: ");
+                        people.setNome(sc.nextLine());
 
-                        for (Evento e : eventos) {
-                            System.out.println(e.getNomeEvento() + " | " + e.getData());
-                        }
+                        daoPessoa.inserir(people);
+                    }
 
-                        System.out.println("Deseja continuar a compra? 1-SIM 2-NÃO");
-                        opAux = sc.nextInt();
-                        if (opAux == 1) {
-                            System.out.print("Digite o número do evento: ");
-                            numAux = sc.nextInt();
-                            Evento evento = null;
-                            evento = daoEvento.buscar(numAux);
-                            while (evento == null) {
-                                System.out.println("Digite um número valido de um evento");
-                                evento = daoEvento.buscar(sc.nextInt());
-                            }
-                            ticket = new Ingresso(evento, pessoa);
-                            daoIngresso.inserir(ticket);
-                        } else {
-                            break;
-                        }
+                    ArrayList<Evento> listaEventos = daoEvento.listar();
 
-                    } else {
-                        eventos = new ArrayList<Evento>();
-                        pessoa = daoPessoa.buscar(varAux);
-                        eventos = daoEvento.listar();
+                    for(Evento e: listaEventos){
+                        System.out.println(
+                            "-----------------------------------------------\n" +
+                            e.getId() + "- " + e.getNomeEvento() + " | " + e.getData() + ", " + e.getHora() +
+                            "\n\tLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
+                            "\n\tIngresso: R$ " + e.getPreco() +
+                            "\n-----------------------------------------------"
+                        );
+                    }
 
-                        for (Evento e : eventos) {
-                            System.out.println(e.getId() + "- " + e.getNomeEvento() + " | " + e.getData());
-                        }
+                    System.out.println("ESCOLHA O EVENTO");
+                    event.setId(sc.nextInt());
 
-                        System.out.println("Deseja continuar a compra? 1-SIM 2-NÃO");
-                        opAux = sc.nextInt();
-                        if (opAux == 2) {
-                            break;
-                        }
-                        System.out.print("Digite o número do evento: ");
-                        numAux = sc.nextInt();
-                        Evento evento;
-                        evento = daoEvento.buscar(numAux);
-                        ticket = new Ingresso(evento, pessoa);
+                    while(daoEvento.buscar(event.getId()) == null && event.getId() != 0){
+                        System.out.println("\nID INVÁLIDO, DIGITE UM NOVO OU 0 PARA SAIR!");
+
+                        System.out.println("ESCOLHA O EVENTO");
+                        event.setId(sc.nextInt());
+                    }
+
+                    System.out.println("TEM CERTEZA? 1-SIM 2-NÃO");
+                    if(1 == sc.nextInt()){
+                        event = daoEvento.buscar(event.getId());
+                        ticket = new Ingresso(event, people);
                         daoIngresso.inserir(ticket);
                     }
-                    break;
+                break;
                 // TELEFONES PARA CONTATO - MENU PRINCIPAL
                 case 5:
                     System.out.println("SAC");
                     System.out.println("----------------------------------");
                     System.out.println("Zona metropolitana (84) 99410-0804");
                     System.out.println("Demais localidades (84) 98170-7242");
-                    break;
+                break;
             }
         } while (resposta != 0);
     }
