@@ -12,7 +12,7 @@ import dominio.Evento;
 public class ClienteEventoDAO {
     private final String INS = "INSERT INTO ClienteEvento(fk_cliente,fk_evento) VALUES (?,?)";
     private final String REL = "SELECT * FROM ClienteEvento";
-    private final String FIL = "SELECT c.nome, ev.nomeEvento FROM ((cliente c JOIN clienteevento li ON li.fk_cliente = c.cpf) JOIN evento ev ON li.fk_evento = ev.id) WHERE (li.fk_cliente = c.cpf) AND (li.fk_evento = ev.id) AND (li.fk_cliente =  ?)";
+    private final String FIL = "SELECT li.fk_cliente, li.fk_evento FROM ((cliente c JOIN clienteevento li ON li.fk_cliente = c.cpf) JOIN evento ev ON li.fk_evento = ev.id) WHERE (li.fk_cliente = c.cpf) AND (li.fk_evento = ev.id) AND (li.fk_cliente =  ?)";
     private Conexao c;
 
     public ClienteEventoDAO(){
@@ -35,7 +35,7 @@ public class ClienteEventoDAO {
     }
 
     public ArrayList<ClienteEvento> listar(){
-        ArrayList<ClienteEvento> lista = null;
+        ArrayList<ClienteEvento> lista = new ArrayList<ClienteEvento>();
         ClienteDAO daoCliente = new ClienteDAO();
         EventoDAO daoEvento = new EventoDAO();
         ClienteEvento ce;
@@ -57,14 +57,12 @@ public class ClienteEventoDAO {
             c.desconectar();
         } catch (Exception e) {
             System.out.println("Erro ao inserir ClienteEvento - " + e.getMessage());
-
         }
-
         return lista;
     }
 
-    public ArrayList<ClienteEvento> filtrarPorCliente(String id) {
-        ArrayList<ClienteEvento> lista = null;
+    public ArrayList<ClienteEvento> filtrarPorCliente(String id){
+        ArrayList<ClienteEvento> lista = new ArrayList<ClienteEvento>();
         ClienteEvento ce;
         ClienteDAO daoCliente = new ClienteDAO();
         EventoDAO daoEvento = new EventoDAO();
@@ -86,13 +84,10 @@ public class ClienteEventoDAO {
                 ce = new ClienteEvento(client, event);
                 lista.add(ce);
             }
-
             c.desconectar();  
         } catch (Exception e) {
             System.out.println("Erro ao filtar ClienteEvento - "+ e.getMessage());
         }
         return lista;
-    }
-
-    
+    }    
 }

@@ -9,8 +9,7 @@ public class Ingresso {
 
     }
 
-    public Ingresso(int id, Evento meuEvento, Pessoa minhaPessoa){
-        this.id = id;
+    public Ingresso(Evento meuEvento, Pessoa minhaPessoa){
         this.meuEvento = meuEvento;
         this.minhaPessoa = minhaPessoa;
     }

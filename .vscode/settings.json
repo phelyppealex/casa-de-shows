@@ -3,6 +3,7 @@
         "lib/**/*.jar",
         "/home/phelyppe/Documentos/postgresql-42.2.27.jre7.jar",
         "/home/phelyppalex/postgresql-42.5.1.jar",
-        "/home/phelyppe/Documentos/postgresql-42.5.1.jar"
+        "/home/phelyppe/Documentos/postgresql-42.5.1.jar",
+        "c:\\Users\\Erick\\Documents\\postgresql-42.5.1.jar"
     ]
 }
