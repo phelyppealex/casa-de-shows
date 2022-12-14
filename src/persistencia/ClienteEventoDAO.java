@@ -4,7 +4,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import persistencia.*;
 import dominio.Cliente;
 import dominio.ClienteEvento;
 import dominio.Evento;
@@ -12,6 +12,7 @@ import dominio.Evento;
 public class ClienteEventoDAO {
     private final String INS = "INSERT INTO ClienteEvento(fk_cliente,fk_evento) VALUES (?,?)";
     private final String REL = "SELECT * FROM ClienteEvento";
+    private final String FIL = "SELECT c.nome, ev.nomeEvento FROM ((cliente c JOIN clienteevento li ON li.fk_cliente = c.cpf) JOIN evento ev ON li.fk_evento = ev.id) WHERE (li.fk_cliente = c.cpf) AND (li.fk_evento = ev.id) AND (li.fk_cliente =  ?)";
     private Conexao c;
 
     public ClienteEventoDAO(){
@@ -56,8 +57,40 @@ public class ClienteEventoDAO {
             c.desconectar();
         } catch (Exception e) {
             System.out.println("Erro ao inserir ClienteEvento - " + e.getMessage());
+
         }
 
+        return lista;
+    }
+
+    public ArrayList<ClienteEvento> filtrarPorCliente(String id) {
+        ArrayList<ClienteEvento> lista = null;
+        ClienteEvento ce;
+        ClienteDAO daoCliente = new ClienteDAO();
+        EventoDAO daoEvento = new EventoDAO();
+        Cliente client;
+        Evento event;
+
+        try {
+            c.conectar();
+            PreparedStatement instrucao = c.getConexao().prepareStatement(FIL);
+            instrucao.setString(1, id);
+            ResultSet rs = instrucao.executeQuery();
+            while(rs.next()){
+                client = daoCliente.buscar(
+                    rs.getString("fk_cliente")
+                );
+                event = daoEvento.buscar(
+                    rs.getInt("fk_evento")
+                );
+                ce = new ClienteEvento(client, event);
+                lista.add(ce);
+            }
+
+            c.desconectar();  
+        } catch (Exception e) {
+            System.out.println("Erro ao filtar ClienteEvento - "+ e.getMessage());
+        }
         return lista;
     }
 

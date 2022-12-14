@@ -25,8 +25,8 @@ public class Principal {
         int resposta;
         
         do{
-            System.out.println("\nMENU PRINCIPAL");
-            System.out.println("-------------------");
+            System.out.println("\n   MENU PRINCIPAL");
+            System.out.println("--------------------");
             System.out.println("1- LOGIN CLIENTE");
             System.out.println("2- CADASTRO CLIENTE");
             System.out.println("3- MOSTRAR CLIENTES");
@@ -55,7 +55,7 @@ public class Principal {
                     
                     do{
                         if(daoCliente.buscar(login) != null){
-                            System.out.println("\nMENU DO CLIENTE");
+                            System.out.println("\n   MENU DO CLIENTE");
                             System.out.println("---------------------");
                             System.out.println("1- CRIAR EVENTO");
                             System.out.println("2- LISTAR EVENTOS");
@@ -76,8 +76,8 @@ public class Principal {
                             // CRIAR EVENTO - MENU DO CLIENTE
                             case 1:
                                 Evento event = new Evento();
-                                System.out.println("\nCADASTRO DE EVENTO");
-                                System.out.println("------------------");
+                                System.out.println("\n  CADASTRO DE EVENTO");
+                                System.out.println("----------------------");
                                 event.setId(0);
 
                                 System.out.print("DESCRIÇÃO DO EVENTO: ");
@@ -119,29 +119,33 @@ public class Principal {
                                 Evento ultimoEvento = daoEvento.pegarUltimo();
                                 ClienteEvento clienteEvento = new ClienteEvento(clienteLogado,ultimoEvento);
                                 daoClienteEvento.inserir(clienteEvento);
+                                
+
+
                             break;
                             // LISTAR EVENTOS - MENU DO CLIENTE
                             case 2:
-                                ArrayList<Evento> listaEventos = daoEvento.listar();
-                                System.out.println("\nMEUS EVENTOS");
-                                System.out.println("--------------------");
+                                ArrayList<ClienteEvento> listaEventos = daoClienteEvento.filtrarPorCliente(login);
+                                System.out.println("\n    MEUS EVENTOS");
+                                System.out.println("---------------------");
 
-                                for(Evento e: listaEventos){
+                                for(ClienteEvento e: listaEventos){
                                     System.out.println(
-                                        "ID: " + e.getId() +
-                                        "\n" + e.getNomeEvento() +
-                                        "\n" + e.getData() + ", " + e.getHora() +
-                                        "\nCapacidade: " + e.getCapacidade() +
-                                        "\nIngresso: R$ " + e.getPreco() +
-                                        "\nLocal: " + e.getRua() + ", " + e.getNumero() + ", " + e.getBairro() + " - " + e.getCidade() + "/" + e.getUF() + "\n" +
+                                        "ID: " + e.getEvento().getId() +
+                                        "\n" + e.getEvento().getNomeEvento() +
+                                        "\n" + e.getEvento().getData() + ", " + e.getEvento().getHora() +
+                                        "\nCapacidade: " + e.getEvento().getCapacidade() +
+                                        "\nIngresso: R$ " + e.getEvento().getPreco() +
+                                        "\nLocal: " + e.getEvento().getRua() + ", " + e.getEvento().getNumero() +
+                                         ", " + e.getEvento().getBairro() + " - " + e.getEvento().getCidade() + "/" + e.getEvento().getUF() + "\n" +
                                         "-----------------------------------------------"
                                     );
                                 }
                             break;
                             // EDITAR EVENTO - MENU CLIENTE
                             case 3: 
-                                System.out.println("EDITAR EVENTO");
-                                System.out.println("--------------");
+                                System.out.println("    EDITAR EVENTO");
+                                System.out.println("----------------------");
                                 System.out.println("QUAL O ID DO EVENTO (NÚMERO INTEIRO) QUE DESEJA EDITAR?");
                                 idEvento = sc.nextInt();
 
