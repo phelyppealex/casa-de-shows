@@ -1,14 +1,13 @@
 CREATE TABLE IF NOT EXISTS Cliente (
-	cpf text,
+	cpf text PRIMARY KEY,
 	nome text, 
 	telefone text,
 	email text,
-	senha text,
-	PRIMARY KEY (cpf)
+	senha text
 );
 
 CREATE TABLE IF NOT EXISTS Evento (
-	id serial,
+	id serial PRIMARY KEY,
 	nomeEvento text,
 	data_event text,
 	hora text,
@@ -18,29 +17,26 @@ CREATE TABLE IF NOT EXISTS Evento (
 	bairro text,
 	cidade text,
 	UF text,
-	preco decimal,
-	PRIMARY KEY (id)
+	preco decimal
 );
 
 CREATE TABLE IF NOT EXISTS Pessoa (
-	cpf text,
-	nome text,
-	PRIMARY KEY (cpf)
+	cpf text PRIMARY KEY,
+	nome text
 );
 
 CREATE TABLE IF NOT EXISTS Ingresso (
-	id serial,
+	id serial PRIMARY KEY,
 	fk_evento int,
 	fk_pessoa text,
-	FOREIGN KEY (fk_evento) REFERENCES Evento(id),
-	FOREIGN KEY (fk_pessoa) REFERENCES Pessoa(cpf),
-	PRIMARY KEY (id)
+	FOREIGN KEY (fk_evento) REFERENCES Evento(id) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (fk_pessoa) REFERENCES Pessoa(cpf) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ClienteEvento (
 	fk_cliente text,
 	fk_evento int,
-	FOREIGN KEY (fk_cliente) REFERENCES Cliente(cpf),
-	FOREIGN KEY (fk_evento) REFERENCES Evento(id),
+	FOREIGN KEY (fk_cliente) REFERENCES Cliente(cpf)  ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (fk_evento) REFERENCES Evento(id)  ON DELETE SET NULL ON UPDATE CASCADE,
 	PRIMARY KEY (fk_cliente, fk_evento)
 );
