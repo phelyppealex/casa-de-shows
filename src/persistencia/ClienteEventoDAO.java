@@ -33,7 +33,7 @@ public class ClienteEventoDAO {
             System.out.println("Erro na inserção - " + e.getMessage());
         }
     }
-
+    
     public ArrayList<ClienteEvento> listar(){
         ArrayList<ClienteEvento> lista = new ArrayList<ClienteEvento>();
         ClienteDAO daoCliente = new ClienteDAO();

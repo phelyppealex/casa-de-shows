@@ -22,7 +22,7 @@ public class Principal {
         ClienteEventoDAO daoClienteEvento = new ClienteEventoDAO();
 
         Scanner sc = new Scanner(System.in);
-        int resposta, numAux, opAux;
+        int resposta;
         String varAux = new String();
 
         do {
@@ -32,7 +32,8 @@ public class Principal {
             System.out.println("2- CADASTRO CLIENTE");
             System.out.println("3- MOSTRAR CLIENTES");
             System.out.println("4- COMPRA DE INGRESSO");
-            System.out.println("5- CONTATO (SAC)");
+            System.out.println("5- LISTAR COMPRADORES");
+            System.out.println("6- CONTATO (SAC)");
             System.out.println("0- SAIR\n");
             resposta = sc.nextInt();
 
@@ -165,8 +166,6 @@ public class Principal {
                                     );
                                 }
 
-
-
                                 System.out.println("1-NOME");
                                 System.out.println("2-DATA");
                                 System.out.println("3-HORA");
@@ -289,13 +288,16 @@ public class Principal {
                     people.setCpf(sc.nextLine());
 
                     if(daoPessoa.buscar( people.getCpf() ) == null){
-                        System.out.print("INSIRA SEU NOME: ");
+                        System.out.print("O CPF NÃO ESTÁ CADASTRADO\nINSIRA SEU NOME: ");
                         people.setNome(sc.nextLine());
-
+                        
+                        System.out.println("CADASTRANDO...");
                         daoPessoa.inserir(people);
                     }
 
                     ArrayList<Evento> listaEventos = daoEvento.listar();
+
+                    System.out.println("OLÁ, SENHOR(A) "+ daoPessoa.buscar(people.getCpf()).getNome() +"!\nESCOLHA O EVENTO");
 
                     for(Evento e: listaEventos){
                         System.out.println(
@@ -307,7 +309,6 @@ public class Principal {
                         );
                     }
 
-                    System.out.println("ESCOLHA O EVENTO");
                     event.setId(sc.nextInt());
 
                     while(daoEvento.buscar(event.getId()) == null && event.getId() != 0){
@@ -317,15 +318,31 @@ public class Principal {
                         event.setId(sc.nextInt());
                     }
 
-                    System.out.println("TEM CERTEZA? 1-SIM 2-NÃO");
-                    if(1 == sc.nextInt()){
-                        event = daoEvento.buscar(event.getId());
-                        ticket = new Ingresso(event, people);
-                        daoIngresso.inserir(ticket);
+                    if(daoEvento.buscar(event.getId()) != null){
+                        System.out.println("TEM CERTEZA? 1-SIM 2-NÃO");
+                        if(1 == sc.nextInt()){
+                            event = daoEvento.buscar(event.getId());
+                            ticket = new Ingresso(0,event, people);
+                            daoIngresso.inserir(ticket);
+                        }
+                    }
+                break;
+                // LISTAR COMPRADORES - MENU PRINCIPAL
+                case 5:
+                    System.out.println("\n     PESSOAS");
+                    System.out.println("-----------------");
+
+                    ArrayList<Ingresso> listaIngressos = daoIngresso.listar();
+
+                    for(Ingresso i: listaIngressos){
+                        System.out.println(
+                            "\nNome do comprador: " + i.getMinhaPessoa().getNome() +
+                            "\nCPF: " + i.getMinhaPessoa().getCpf()
+                        );
                     }
                 break;
                 // TELEFONES PARA CONTATO - MENU PRINCIPAL
-                case 5:
+                case 6:
                     System.out.println("SAC");
                     System.out.println("----------------------------------");
                     System.out.println("Zona metropolitana (84) 99410-0804");
