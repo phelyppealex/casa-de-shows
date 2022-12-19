@@ -13,7 +13,7 @@ public class ClienteEventoDAO {
     private final String INS = "INSERT INTO ClienteEvento(fk_cliente,fk_evento) VALUES (?,?)";
     private final String REL = "SELECT * FROM ClienteEvento";
     private final String FIL = "SELECT li.fk_cliente, li.fk_evento FROM ((cliente c JOIN clienteevento li ON li.fk_cliente = c.cpf) JOIN evento ev ON li.fk_evento = ev.id) WHERE (li.fk_cliente = c.cpf) AND (li.fk_evento = ev.id) AND (li.fk_cliente =  ?)";
-    private Conexao c;
+    private Conexao c;  
 
     public ClienteEventoDAO(){
         c = new Conexao();

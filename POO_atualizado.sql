@@ -40,3 +40,4 @@ CREATE TABLE IF NOT EXISTS ClienteEvento (
 	FOREIGN KEY (fk_evento) REFERENCES Evento(id)  ON DELETE SET NULL ON UPDATE CASCADE,
 	PRIMARY KEY (fk_cliente, fk_evento)
 );
+

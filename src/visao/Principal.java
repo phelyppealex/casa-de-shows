@@ -229,7 +229,9 @@ public class Principal {
                                 }
                             break;
                             case 5:
-                                daoCliente.deletar(login);
+                                System.out.println("Tem certeza? \n1 para sim, qualquer tecla pra não");
+                                if(sc.nextInt() == 1)
+                                    daoCliente.deletar(login);
                         break;
                         }
                     } while (respostaCliente != 0);

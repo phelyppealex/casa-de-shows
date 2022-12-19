@@ -12,7 +12,7 @@ public class Conexao {
     public Conexao(){
         this.caminho = "jdbc:postgresql://localhost:5432/BDCasaDeFestas";
         this.usuario = "postgres";
-        this.senha = "1234";
+        this.senha = "123";
     }
 
     public Conexao(String caminho, String usuario, String senha){
