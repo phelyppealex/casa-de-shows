@@ -58,7 +58,7 @@ public class IngressoDAO {
             if(rs.next()){
                 event = daoEvent.buscar(rs.getInt("fk_evento"));
                 people = daoPeople.buscar(rs.getString("fk_pessoa"));
-                ticket = new Ingresso(event, people);
+                ticket = new Ingresso(rs.getInt("id"),event, people);
             }
             c.desconectar();
         }catch(Exception e){
